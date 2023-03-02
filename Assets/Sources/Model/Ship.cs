@@ -12,7 +12,17 @@ namespace Asteroids.Model
         private readonly float _secondsToStop = 1f;
         private readonly float _degreesPerSecond = 180;
 
+        private int _health = 3;
+
         public Vector2 Acceleration { get; private set; }
+        public void TakeDamage()
+        {
+            _health--;
+            if (_health == 0)
+            {
+                Destroy();
+            }
+        }
 
         public void Accelerate(float deltaTime)
         {
