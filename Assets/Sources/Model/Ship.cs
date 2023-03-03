@@ -15,6 +15,7 @@ namespace Asteroids.Model
         private int _health = 3;
 
         public Vector2 Acceleration { get; private set; }
+
         public void TakeDamage()
         {
             _health--;

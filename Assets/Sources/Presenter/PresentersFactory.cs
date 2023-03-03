@@ -10,6 +10,8 @@ public class PresentersFactory : MonoBehaviour
     [SerializeField] private Presenter _asteroidTemplate;
     [SerializeField] private Presenter _asteroidPartTemplate;
     [SerializeField] private Presenter _nloTemplate;
+    [SerializeField] private Presenter _redNloTemplate;
+    [SerializeField] private Presenter _blueNloTemplate;
 
     public void CreateBullet(Bullet bullet)
     {
@@ -27,7 +29,18 @@ public class PresentersFactory : MonoBehaviour
 
     public void CreateNlo(Nlo nlo)
     {
-        CreatePresenter(_nloTemplate, nlo);
+        switch (nlo.Team)
+        {
+            case EnemiesTeams.AgainstPlayer:
+                CreatePresenter(_nloTemplate, nlo);
+                break;
+            case EnemiesTeams.Red:
+                CreatePresenter(_redNloTemplate, nlo);
+                break;
+            case EnemiesTeams.Blue:
+                CreatePresenter(_blueNloTemplate, nlo);
+                break;
+        }
     }
 
     public void CreateAsteroid(Asteroid asteroid)

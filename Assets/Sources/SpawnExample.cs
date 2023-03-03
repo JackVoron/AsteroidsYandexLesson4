@@ -1,5 +1,6 @@
 using UnityEngine;
 using Asteroids.Model;
+using System.Collections.Generic;
 
 public class SpawnExample : MonoBehaviour
 {
@@ -24,9 +25,21 @@ public class SpawnExample : MonoBehaviour
     {
         float chance = Random.Range(0, 100);
 
-        if (chance < 20)
+        if (chance < 30)
         {
-            _factory.CreateNlo(new Nlo(_init.Ship, GetRandomPositionOutsideScreen(), Config.NloSpeed));
+           _factory.CreateNlo(new Nlo(_init.Ship, GetRandomPositionOutsideScreen(), Config.NloSpeed));
+        }
+        else if(chance < 60)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Nlo redNlo = new Nlo(_init.Ship, GetRandomPositionOutsideScreen(), Config.NloSpeed, EnemiesTeams.Red);
+                Nlo blueNlo = new Nlo(redNlo, GetRandomPositionOutsideScreen(), Config.NloSpeed, EnemiesTeams.Blue);
+                redNlo.Target = blueNlo;
+            
+                _factory.CreateNlo(redNlo);
+                _factory.CreateNlo(blueNlo);
+            }
         }
         else
         {
